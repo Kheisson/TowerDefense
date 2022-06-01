@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 6820044494206117899}
   - component: {fileID: 4036289481451037470}
   - component: {fileID: 4890554222076414646}
+  - component: {fileID: 4644444925752834623}
   m_Layer: 10
   m_Name: TurretPivot
   m_TagString: Untagged
@@ -216,7 +217,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ff6e5868aeb7b48b2d0517720209bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _placementIndicator: {fileID: 802947668489787323}
+  _placementIndicator: {fileID: 6166635258413382788}
+--- !u!114 &4644444925752834623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344721224960556157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb3487f75834954bb2d86a7982d4f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2711896093665798310
 PrefabInstance:
   m_ObjectHideFlags: 0
