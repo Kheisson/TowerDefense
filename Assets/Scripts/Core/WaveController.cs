@@ -7,34 +7,35 @@ namespace Core
     {
         #region Editor
 
-        [SerializeField] private float waveStartDelay = 10f;
+        [SerializeField] private string waveCount = "10";
         [SerializeField] private float spawnRate = 2f;
+        [SerializeField] private Announcement announcmentUI;
         
         #endregion
 
         #region Fields
-
-        private Announcement _announcementUI;
         private WaveSpawner _waveSpawner;
-
+        private Announcement _currentAnnouncmentUI;
         #endregion
 
         #region Methods
 
         private void Start()
         {
-            _announcementUI = FindObjectOfType<Announcement>();
             _waveSpawner = GetComponent<WaveSpawner>();
-            _announcementUI.FinishedCountdown += StartWave;
         }
 
         public void InitializeWave()
         {
-            _announcementUI.Show("10", 1f);
+            var canvasPos = FindObjectOfType<Canvas>().gameObject.transform;
+            _currentAnnouncmentUI = Instantiate(announcmentUI, canvasPos);
+            _currentAnnouncmentUI.Show(waveCount, 1f);
+            _currentAnnouncmentUI.FinishedCountdown += StartWave;
         }
         private void StartWave()
         {
-            _waveSpawner.StartSpawning();
+            announcmentUI.FinishedCountdown -= StartWave;
+            _waveSpawner.StartSpawning(spawnRate);
         }
 
         #endregion

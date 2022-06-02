@@ -22,6 +22,7 @@ namespace Core
         public Board GameBoard { get; private set; }
         public int CurrentWave { get; private set; }
         public PlayerState PlayerState { get; private set; }
+        public PlayerData PlayerData { get; private set; }
         public static GameManager Instance => _instance;
         #endregion
 
@@ -37,6 +38,7 @@ namespace Core
         {
             CreateSingletonInstance();
             PlayerState = new PlayerState();
+            PlayerData = new PlayerData();
             CurrentWave = 1;
             GameBoard = FindObjectOfType<Board>();
             _waveController = GetComponent<WaveController>();

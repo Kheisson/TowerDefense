@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5157e5a06030472787753d9faa6143c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretPrefab: {fileID: 2881188079887200640, guid: 1fbb0aaba0b1b4dc38af264404885238,
+  turretPrefab: {fileID: 4640374225294159891, guid: 1fbb0aaba0b1b4dc38af264404885238,
     type: 3}
   unitNamePlacement: {fileID: 8134579665600811133}
   unitPricePlacement: {fileID: 5414958273060802621}

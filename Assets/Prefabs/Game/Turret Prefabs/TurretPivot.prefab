@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6851395054245942127}
   - component: {fileID: 5052206843542650412}
   - component: {fileID: 3897430632623714500}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: FloorModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9165059685596771869}
   - component: {fileID: 651140835126928868}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ArrowIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38206384280602759}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ArrowContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4036289481451037470}
   - component: {fileID: 4890554222076414646}
   - component: {fileID: 4644444925752834623}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TurretPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using Player;
+using Turrets;
 using UnityEngine;
 
 namespace Enemy
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Animator), typeof(Collider))]
     public class BaseEnemy : MonoBehaviour
     {
         #region Editor
@@ -15,18 +17,17 @@ namespace Enemy
         
         #region Fields
 
-        private Animator _animator;
         private EnemyMovement _enemyMovementScript;
         private int _runAnimationId;
         private int _attackAnimationId;
         private int _enemySpeed;
         private int _enemyHealth;
-        private int _enemyDamage;
 
         private ParticleSystem _deathParticles;
         private ParticleSystem _despawnParticles;
         private ParticleSystem _coreHitParticles;
 
+        protected Animator _animator;
         protected Vector3[] followPath;
 
         #endregion
@@ -60,7 +61,6 @@ namespace Enemy
         {
             _enemyHealth = enemySettings.EnemyHealth;
             _enemySpeed = enemySettings.EnemySpeed;
-            _enemyDamage = enemySettings.EnemyDamage;
             ReSpawn();
         }
 
@@ -112,6 +112,29 @@ namespace Enemy
             _despawnParticles.Stop();
             _coreHitParticles = Instantiate(enemySettings.SuccessfulHitParticles, transform);
             _coreHitParticles.Stop();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out PlayerCore core))
+            {
+                core.TakeDamage(enemySettings.EnemyDamage);
+            }
+        }
+
+        private void OnParticleCollision(GameObject other)
+        {
+            var turret = other.GetComponentInParent<TargetLocator>();
+            Damage(turret.Damage);
+        }
+
+        private void Damage(int amount)
+        {
+            _enemyHealth -= amount;
+            if (_enemyHealth < 0)
+            {
+                OnDeath();
+            }
         }
 
         #endregion

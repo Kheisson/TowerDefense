@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,8 +50,8 @@ namespace UI
             _countDown -= 1;
             if (_countDown == 0)
             {
-                gameObject.SetActive(false);
                 FinishedCountdown?.Invoke();
+                Destroy(gameObject, 0.1f);
             };
             UpdateText(_countDown.ToString());
             _remainingShowTime = _totalShowTime;
