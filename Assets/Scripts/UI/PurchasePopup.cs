@@ -73,7 +73,7 @@ namespace UI
             var buildingCost = building.BuildCost;
             if (GameManager.Instance.PlayerState.TryTakeFunds(buildingCost))
             {
-                var instance = Spawner.Spawn(building.gameObject).GetComponent<BaseBuilding>();
+                var instance = Instantiate(building.gameObject).GetComponent<BaseBuilding>();
                 _currentlySelectedPivot.SetBuilding(instance);
             }
             HidePopup();

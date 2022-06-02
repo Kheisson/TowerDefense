@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 4532626430057062021}
   - component: {fileID: 4592701867657928887}
   - component: {fileID: 5358203287442408748}
+  - component: {fileID: -5161510965223366379}
   m_Layer: 0
   m_Name: AirEnemy
   m_TagString: Untagged
@@ -480,6 +481,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySettings: {fileID: 11400000, guid: 7550ca52b90534049afc844bd5795f4b, type: 2}
+--- !u!135 &-5161510965223366379
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534277614061575051}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &4534298274487613475
 GameObject:
   m_ObjectHideFlags: 0

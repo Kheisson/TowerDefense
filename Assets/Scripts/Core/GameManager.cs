@@ -14,6 +14,7 @@ namespace Core
         
         #region Fields
         private static GameManager _instance;
+        private WaveController _waveController;
         #endregion
 
         #region Properties
@@ -36,7 +37,9 @@ namespace Core
         {
             CreateSingletonInstance();
             PlayerState = new PlayerState();
+            CurrentWave = 1;
             GameBoard = FindObjectOfType<Board>();
+            _waveController = GetComponent<WaveController>();
         }
 
         private void CreateSingletonInstance()
@@ -56,10 +59,11 @@ namespace Core
 
         private void StartNewGame()
         {
-            CurrentWave = 4;
+            CurrentWave = 1;
             PlayerState.AddFunds(playerSettings.PlayerStartingFundsValue);
             IsInGame = true;
             StartCoroutine(InGameCoroutine());
+            _waveController.InitializeWave();
         }
 
         private IEnumerator InGameCoroutine()
