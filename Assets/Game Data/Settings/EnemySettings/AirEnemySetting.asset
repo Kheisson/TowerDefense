@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2feb1d8bfab4f50a1ae2914c98ad1bb, type: 3}
+  m_Name: AirEnemySetting
+  m_EditorClassIdentifier: 
+  enemyScoreGrant: 20
+  enemyFundsGrant: 30
+  startingHealth: 200
+  incrementHealthValue: 0
+  startingSpeed: 1
+  incrementSpeedValue: 0
+  damage: 20
+  deathParticles: {fileID: 198189831017407990, guid: 31eb2ce625d13064ba94a85456d31852,
+    type: 3}
+  successfulHitParticles: {fileID: 198189831017407990, guid: 0f643420b5787a649933c833b77c8e73,
+    type: 3}
+  despawnParticles: {fileID: 198189831017407990, guid: 1ba3a06d72ea4594987f1d9531efd3f2,
+    type: 3}

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Core;
+﻿using Core;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,25 +22,24 @@ namespace UI
 
         private void Awake()
         {
-            _gameManager = GameManager.Instance;
             _playerCore = FindObjectOfType<PlayerCore>();
         }
 
         private void Start()
         {
-            _gameManager.PlayerStateUpdated += OnPlayerStateUpdated;
+            GameManager.Instance.PlayerStateUpdated += OnPlayerStateUpdated;
         }
 
         private void OnPlayerStateUpdated()
         {
-            _scoreText.text = _gameManager.PlayerState.Score.ToString();
-            _fundsText.text = _gameManager.PlayerState.Funds.ToString();
+            _scoreText.text = GameManager.Instance.PlayerState.Score.ToString();
+            _fundsText.text = GameManager.Instance.PlayerState.Funds.ToString();
             _coreHealthText.text = _playerCore.Hp.ToString();
         }
 
         private void OnDestroy()
         {
-            _gameManager.PlayerStateUpdated -= OnPlayerStateUpdated;
+            GameManager.Instance.PlayerStateUpdated -= OnPlayerStateUpdated;
         }
     }
 }

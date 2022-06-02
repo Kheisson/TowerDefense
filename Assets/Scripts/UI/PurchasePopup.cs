@@ -61,7 +61,7 @@ namespace UI
             }
             else
             {
-                var sellAmount = Mathf.RoundToInt(_currentlySelectedPivot.CurrentBuilding.SellPrice * 0.5f).ToString();
+                var sellAmount = Mathf.RoundToInt(_currentlySelectedPivot.CurrentBuilding.BuildCost * 0.5f).ToString();
                 DisplaySellButton(sellAmount);
             }
 
@@ -76,6 +76,15 @@ namespace UI
                 var instance = Spawner.Spawn(building.gameObject).GetComponent<BaseBuilding>();
                 _currentlySelectedPivot.SetBuilding(instance);
             }
+            HidePopup();
+            PurchaseComplete?.Invoke();
+        }
+
+        public void Sell()
+        {
+            var funds = Mathf.RoundToInt(_currentlySelectedPivot.CurrentBuilding.BuildCost * 0.5f);
+            GameManager.Instance.PlayerState.AddFunds(funds);
+            _currentlySelectedPivot.RemoveBuilding();
             HidePopup();
             PurchaseComplete?.Invoke();
         }
@@ -122,11 +131,13 @@ namespace UI
                     Debug.LogError("No Sell buttons were found in the popup", gameObject);
                     return;
                 }
+
+                _sellTurretButton = button;
             }
             
-            foreach (var button in _turretButtons)
+            foreach (var turretButton in _turretButtons)
             {
-                button.gameObject.SetActive(true);
+                turretButton.gameObject.SetActive(false);
             }
             
             _sellTurretButton.gameObject.SetActive(true);

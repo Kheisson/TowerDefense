@@ -1,3 +1,4 @@
+using Core;
 using TMPro;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace UI
     {
         #region Fields
 
-        private const string SELLING_TEXT = "Sell Turret? -";
+        private const string SELLING_TEXT = "Sell Turret? - $";
         private TextMeshProUGUI _priceLabel;
         #endregion
         
@@ -20,8 +21,6 @@ namespace UI
 
         public void SetText(string sellAmount)
         {
-            if (_priceLabel.text.Contains(sellAmount))
-                return;
             _priceLabel.text = SELLING_TEXT + sellAmount;
         }
 

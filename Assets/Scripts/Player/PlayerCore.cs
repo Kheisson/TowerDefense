@@ -1,28 +1,31 @@
 ﻿using UnityEngine;
 
-public class PlayerCore : MonoBehaviour
+namespace Player
 {
-    [SerializeField]
-    private int _hp = 200;
-
-    public bool IsAlive => _hp > 0;
-
-    public int Hp => _hp;
-
-    public void TakeDamage(int amount)
+    public class PlayerCore : MonoBehaviour
     {
-        if (!IsAlive)
-        {
-            return;
-        }
-        _hp = Mathf.Max(0, _hp - amount);
-        if (!IsAlive)
-        {
-            OnDeath();
-        }
-    }
+        [SerializeField]
+        private int _hp = 200;
 
-    private void OnDeath()
-    {
+        public bool IsAlive => _hp > 0;
+
+        public int Hp => _hp;
+
+        public void TakeDamage(int amount)
+        {
+            if (!IsAlive)
+            {
+                return;
+            }
+            _hp = Mathf.Max(0, _hp - amount);
+            if (!IsAlive)
+            {
+                OnDeath();
+            }
+        }
+
+        private void OnDeath()
+        {
+        }
     }
 }

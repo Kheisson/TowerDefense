@@ -1,22 +1,26 @@
 using System;
 using System.Collections;
+using BoardSetup;
+using Player;
 using UnityEngine;
 
 namespace Core
 {
     public class GameManager : MonoBehaviour
     {
-        #region Fields
+        #region Editor
+        [SerializeField] private PlayerSettings playerSettings;
+        #endregion
         
+        #region Fields
         private static GameManager _instance;
-
         #endregion
 
         #region Properties
-
         public bool IsInGame { get; private set; }
+        public Board GameBoard { get; private set; }
+        public int CurrentWave { get; private set; }
         public PlayerState PlayerState { get; private set; }
-
         public static GameManager Instance => _instance;
         #endregion
 
@@ -30,15 +34,19 @@ namespace Core
 
         private void Awake()
         {
+            CreateSingletonInstance();
+            PlayerState = new PlayerState();
+            GameBoard = FindObjectOfType<Board>();
+        }
+
+        private void CreateSingletonInstance()
+        {
             if (_instance == null)
                 _instance = this;
             else
             {
                 Destroy(this);
             }
-            
-            PlayerState = new PlayerState();
-            
         }
 
         private void Start()
@@ -48,7 +56,8 @@ namespace Core
 
         private void StartNewGame()
         {
-            PlayerState.AddFunds(100);
+            CurrentWave = 4;
+            PlayerState.AddFunds(playerSettings.PlayerStartingFundsValue);
             IsInGame = true;
             StartCoroutine(InGameCoroutine());
         }
@@ -57,10 +66,10 @@ namespace Core
         {
             while (IsInGame)
             {
-                PlayerState.AddFunds(10);
-                PlayerState.AddScore(10);
+                PlayerState.AddFunds(playerSettings.ProgressFundsIncrementValue);
+                PlayerState.AddScore(playerSettings.ProgressScoreIncrementValue);
                 PlayerStateUpdated?.Invoke();
-                yield return new WaitForSecondsRealtime(1f);
+                yield return new WaitForSecondsRealtime(playerSettings.ProgressTimer);
             }
         }
         #endregion

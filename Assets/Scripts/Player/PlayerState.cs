@@ -1,25 +1,28 @@
-﻿public class PlayerState
+﻿namespace Player
 {
-    public int Funds { get; private set; }
-    public int Score { get; private set; }
-
-    public void AddScore(int amount)
+    public class PlayerState
     {
-        Score += amount;
-    }
+        public int Funds { get; private set; }
+        public int Score { get; private set; }
 
-    public void AddFunds(int amount)
-    {
-        Funds += amount;
-    }
-
-    public bool TryTakeFunds(int amount)
-    {
-        if (Funds < amount)
+        public void AddScore(int amount)
         {
-            return false;
+            Score += amount;
         }
-        Funds -= amount;
-        return true;
+
+        public void AddFunds(int amount)
+        {
+            Funds += amount;
+        }
+
+        public bool TryTakeFunds(int amount)
+        {
+            if (Funds < amount)
+            {
+                return false;
+            }
+            Funds -= amount;
+            return true;
+        }
     }
 }
