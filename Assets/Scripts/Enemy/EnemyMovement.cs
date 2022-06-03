@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Core;
 using UnityEngine;
 
 namespace Enemy
@@ -11,6 +12,12 @@ namespace Enemy
 
         private IEnumerator FollowPath(Vector3[] path, int speed, Action onCompletePath)
         {
+            if (!GameManager.Instance.IsInGame)
+            {
+                StopMovement();
+                yield break;
+            }
+                
             for (int i = 1; i < path.Length; i++)
             {
                 var startingPosition = transform.position;
@@ -32,6 +39,11 @@ namespace Enemy
         public void StartFollowingPath(Vector3[] path, int speed, Action onCompletePath)
         {
             StartCoroutine(FollowPath(path, speed, onCompletePath));
+        }
+
+        private void StopMovement()
+        {
+            GetComponent<BaseEnemy>().StopRunningAnimation();
         }
 
         #endregion

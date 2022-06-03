@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Core;
 using Player;
 using Turrets;
 using UnityEngine;
@@ -54,6 +55,7 @@ namespace Enemy
             _attackAnimationId = Animator.StringToHash(ATTACK_ANIMATION_NAME);
             _enemyMovementScript = gameObject.AddComponent<EnemyMovement>();
             InitiateParticles();
+            EnemyDestroyed += GameManager.Instance.UpdateScore;
         }
 
         //Populates enemy data based on the current wave we are in
@@ -91,7 +93,6 @@ namespace Enemy
             _enemyMovementScript.StartFollowingPath(followPath, _enemySpeed, OnSuccessfulHit);
         }
 
-        private void StopRunningAnimation() => _animator.SetBool(_runAnimationId, false);
 
         private void DisableWithDelay() => StartCoroutine(Disable());
 
@@ -136,6 +137,14 @@ namespace Enemy
                 OnDeath();
             }
         }
+
+        private void OnDestroy()
+        {
+            EnemyDestroyed -= GameManager.Instance.UpdateScore;
+        }
+
+        public void StopRunningAnimation() => _animator.SetBool(_runAnimationId, false);
+
 
         #endregion
     }

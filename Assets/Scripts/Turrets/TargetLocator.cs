@@ -64,6 +64,7 @@ namespace Turrets
 
         private void OnTriggerExit(Collider other)
         {
+            if (_currentTarget == null) return;
             if (other.gameObject == _currentTarget.gameObject)
             {
                 _currentTarget = null;

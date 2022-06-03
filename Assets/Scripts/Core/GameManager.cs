@@ -15,6 +15,7 @@ namespace Core
         #region Fields
         private static GameManager _instance;
         private WaveController _waveController;
+        private PlayerCore _playerCore;
         #endregion
 
         #region Properties
@@ -39,9 +40,17 @@ namespace Core
             CreateSingletonInstance();
             PlayerState = new PlayerState();
             PlayerData = new PlayerData();
+            InitiateFirstRound();
+        }
+
+        private void InitiateFirstRound()
+        {
             CurrentWave = 1;
             GameBoard = FindObjectOfType<Board>();
             _waveController = GetComponent<WaveController>();
+            _playerCore = FindObjectOfType<PlayerCore>();
+
+            _playerCore.PlayerDeath += GameOver;
         }
 
         private void CreateSingletonInstance()
@@ -61,7 +70,7 @@ namespace Core
 
         private void StartNewGame()
         {
-            CurrentWave = 1;
+            Time.timeScale = 1f;
             PlayerState.AddFunds(playerSettings.PlayerStartingFundsValue);
             IsInGame = true;
             StartCoroutine(InGameCoroutine());
@@ -78,6 +87,41 @@ namespace Core
                 yield return new WaitForSecondsRealtime(playerSettings.ProgressTimer);
             }
         }
+
+        private IEnumerator GameOverSequence()
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            var sceneLoader = Instantiate(new GameObject("SceneLoader"),transform);
+            sceneLoader.AddComponent<SceneController>().LoadGameOverScene();
+            Time.timeScale = 0f;
+        }
+
+        public void GameOver()
+        {
+            PlayerData.SetHighScore(PlayerState.Score);
+            IsInGame = false;
+            StartCoroutine(GameOverSequence());
+        }
+
+        public void UpdateScore(int score, int funds)
+        {
+            PlayerState.AddScore(score);
+            PlayerState.AddFunds(funds);
+        }
+
+        public void AdvanceWave()
+        {
+            IsInGame = false;
+            CurrentWave++;
+            _waveController.InitializeWave();
+        }
+
+        public void LevelStarted()
+        {
+            IsInGame = true;
+            StartCoroutine(InGameCoroutine());
+        }
+
         #endregion
     }
 }

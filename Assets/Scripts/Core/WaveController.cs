@@ -35,6 +35,7 @@ namespace Core
         private void StartWave()
         {
             announcmentUI.FinishedCountdown -= StartWave;
+            GameManager.Instance.LevelStarted();
             _waveSpawner.StartSpawning(spawnRate);
         }
 

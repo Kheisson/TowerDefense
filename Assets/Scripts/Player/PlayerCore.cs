@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using SpecialEffects;
+using UnityEngine;
 
 namespace Player
 {
@@ -10,6 +12,8 @@ namespace Player
         public bool IsAlive => _hp > 0;
 
         public int Hp => _hp;
+
+        public event Action PlayerDeath;
 
         public void TakeDamage(int amount)
         {
@@ -24,8 +28,11 @@ namespace Player
             }
         }
 
+        [ContextMenu("Player Core Death")]
         private void OnDeath()
         {
+            gameObject.AddComponent<Explode>();
+            PlayerDeath?.Invoke();
         }
     }
 }
